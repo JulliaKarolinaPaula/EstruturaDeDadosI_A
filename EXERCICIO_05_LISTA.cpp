@@ -143,5 +143,11 @@ int main(){
       a.print();
       a.controlarAdicao(9);
       a.print();
+      /*-----------------------------------------------------------------------------------*/
+      Lista b;
+      b.adicionarInicio(1);
+      b.print();
+      b.controlarAdicao(2);
+      b.print();
       return 0;
 }
