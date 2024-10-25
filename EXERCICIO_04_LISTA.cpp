@@ -1,0 +1,121 @@
+/*4. Crie um método que receba um número N e insira na lista todos os números de 1 até N.*/
+#include <stdio.h>
+struct No{
+      int valor;
+      No *proximo;
+
+      No(){
+        proximo = NULL;
+        valor = 0;
+      }
+
+      No(int _valor){
+        valor = _valor;
+        proximo = NULL;
+        
+      }
+
+};
+struct Lista{
+    No *primeiro;
+    No *ultimo;
+    int c;
+
+    Lista(){
+      primeiro = NULL;
+      ultimo = NULL;
+      c = 0;
+    }
+
+    bool vazio(){
+      return primeiro == NULL;
+    }
+
+    void adicionarInicio(int valor){
+        No *n = new No(valor);
+        c++;
+        if(vazio()){
+          primeiro = n;
+          ultimo = n;
+          return;
+        }
+
+        n -> proximo = primeiro;
+        primeiro = n;
+    }
+
+    void adicionarFim(int valor){
+      No *n = new No(valor);
+      c++;
+      if(vazio()){
+        primeiro = n;
+        ultimo = n;
+      }
+      ultimo -> proximo = n;
+      ultimo = n;
+    }
+
+    void print(){
+      No *aux = primeiro;
+      printf("\n");
+        while(aux != NULL){
+            printf("%d -> ", aux -> valor);
+            aux = aux -> proximo;
+        }
+        if((c==0)&&(primeiro==NULL)&&(ultimo==NULL)){
+            printf("Lista Vazia.");
+        }
+    }
+    int tamanho(){
+      return c;
+    }
+
+    void removerInicio(){
+      if(vazio()) return;
+      if(c==1){
+        delete(primeiro);
+        primeiro = NULL;
+        ultimo = NULL;
+        c = 0;
+        return;
+      }
+      No *apagar = primeiro;
+      primeiro = primeiro -> proximo;
+      delete(apagar);
+      c--;
+    }
+
+    void removerFim(){
+      if(vazio()) return;
+      if(c==1){
+        delete(primeiro);
+        primeiro = NULL;
+        ultimo = NULL;
+        c = 0;
+        return;
+      }
+      No *apagar = ultimo;
+      No *aux = primeiro;
+
+      while(aux -> proximo != ultimo){
+        aux = aux -> proximo;
+      }
+      ultimo = aux;
+      ultimo -> proximo = NULL;
+      delete(apagar);
+      c--;
+    }
+    void controlarAdicao(int n){
+      for(int i = 1;i <= n;i++){
+            adicionarFim(i);
+      }
+      
+    }
+};
+
+int main(){
+      Lista a;
+      a.controlarAdicao(10);
+      a.print();
+      return 0;
+}
